@@ -1,0 +1,192 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-0">   <!-- bg-gradient-danger -->
+    <div class="container-fluid">
+      <div class="header-body">
+      </div>
+    </div>
+</div>
+<div class="card-body">
+  <div class="container-fluid my-form">
+    <div class="row">
+      <div class="col-lg-12">
+      </div>
+      <div class="col-lg-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-xl-4 col-md-12">
+                <h3 class="mb-0">Xem đơn hàng</h3>
+              </div>
+              <div class="col-xl-8 col-md-12 text-right">
+                <button (click)="UpdateStatusPayment()" class="btn btn-primary"><span
+                   class="spinner-border spinner-border-sm mr-1"></span>Lưu</button>
+                <a [routerLink]="['/admin/list-order']" class="btn btn-default">Hủy</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="nav-wrapper">
+                <ul class="nav nav-pills nav-fill flex-column flex-md-row tab-build" role="tablist">
+                    <li *ngFor="let wallet of tabchange; let first = first;" [ngClass]="{firstItem: first}" role="presentation" class="accounts_li" [class.active]="selectedwallet===wallet" class="nav-item">
+                        <a *ngIf="selectedwallet === wallet" (click)="selectedwallet = wallet" aria-controls="one" role="tab" data-toggle="tab" class="nav-link mb-sm-3 mb-md-0 active">{{wallet}}</a>
+                        <a *ngIf="selectedwallet != wallet"(click)="selectedwallet = wallet" aria-controls="one" role="tab" data-toggle="tab" class="nav-link mb-sm-3 mb-md-0">{{wallet}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" *ngIf="selectedwallet === tabchange[0]" role="tabpanel" class="tab-pane active" id="one">
+                  <div class="card-body">
+                    <form [formGroup]="form">
+                      <h6 class="heading-small text-muted mb-4">Thông tin đơn hàng</h6>
+                      <div class="pl-lg-4">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="CustomerName">Tên khách hàng</label>
+                              <input type="text" class="form-control form-control-alternative" placeholder="Tên khách hàng"
+                                [ngClass]="{ 'is-invalid': submitted && f.CustomerName.errors }" formControlName="CustomerName">
+                              <div *ngIf="submitted && f.CustomerName.errors" class="invalid-feedback">
+                                <div *ngIf="f.CustomerName.errors.required">Vui lòng không xóa tên khách hàng</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="CustomerPhone">Số điện thoại khách hàng</label>
+                              <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại khách hàng"
+                                [ngClass]="{ 'is-invalid': submitted && f.CustomerPhone.errors }" formControlName="CustomerPhone">
+                              <div *ngIf="submitted && f.CustomerPhone.errors" class="invalid-feedback">
+                                <div *ngIf="f.CustomerPhone.errors.required">Vui lòng không xóa số điện thoại khách hàng</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="CustomerEmail">Email khách hàng</label>
+                              <input type="email" class="form-control form-control-alternative" placeholder="Email khách hàng"
+                                [ngClass]="{ 'is-invalid': submitted && f.CustomerEmail.errors }" formControlName="CustomerEmail">
+                              <div *ngIf="submitted && f.CustomerEmail.errors" class="invalid-feedback">
+                                <div *ngIf="f.CustomerEmail.errors.required">Vui lòng không xóa email khách hàng</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="TotalMoney">Tổng tiền đơn hàng (VNĐ)</label>
+                              <input type="text" ngxNumberFormat="#,###,###,###" class="form-control form-control-alternative" placeholder="Tổng tiền đơn hàng" 
+                                [ngClass]="{ 'is-invalid': submitted && f.TotalMoney.errors }" formControlName="TotalMoney">
+                              <div *ngIf="submitted && f.TotalMoney.errors" class="invalid-feedback">
+                                <div *ngIf="f.TotalMoney.errors.required">Vui lòng không xóa tổng tiền đơn hàng</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="TypePaymentName">Phương thức thanh toán</label>
+                              <input type="text" class="form-control form-control-alternative" placeholder="Phương thức thanh toán"
+                                [ngClass]="{ 'is-invalid': submitted && f.TypePaymentName.errors }" formControlName="TypePaymentName">
+                              <div *ngIf="submitted && f.TypePaymentName.errors" class="invalid-feedback">
+                                <div *ngIf="f.TypePaymentName.errors.required">Vui lòng không xóa phương thức thanh toán</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="StatusPaymentId">Trạng thái thanh toán</label>
+                              <select  class="form-control form-control-alternative" (change)="UpdateStatusPaymentId($event.target.value)">
+                                <option *ngFor="let item of statusPaymentOptions" [ngValue]="item.Id" [selected]="item.Id == statusPaymentChecked">{{item.Title}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="form-group">
+                              <label class="form-control-label" for="CustomerAddress">Địa chỉ khách hàng</label>
+                              <textarea rows="5" class="form-control form-control-alternative" placeholder="Địa chỉ khách hàng"
+                                [ngClass]="{ 'is-invalid': submitted && f.CustomerAddress.errors }" formControlName="CustomerAddress">
+                              </textarea>
+                              <div *ngIf="submitted && f.CustomerAddress.errors" class="invalid-feedback">
+                                <div *ngIf="f.CustomerAddress.errors.required">Vui lòng không xóa địa chỉ khách hàng</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="form-group">
+                              <label class="form-control-label" for="Note">Ghi chú</label>
+                              <textarea rows="5" class="form-control form-control-alternative" placeholder="Ghi chú"
+                                [ngClass]="{ 'is-invalid': submitted && f.Note.errors }" formControlName="Note">
+                              </textarea>
+                              <div *ngIf="submitted && f.Note.errors" class="invalid-feedback">
+                                <div *ngIf="f.Note.errors.required">Vui lòng không xóa ghi chú</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="tab-pane fade show active" *ngIf="selectedwallet === tabchange[1]" role="tabpanel" class="tab-pane active" id="two">
+                  <div class="card-body"></div>
+                  <div class="table-responsive">
+                    <table class="table align-items-center table-flush" style="background-color: white;">
+                      <thead class="table-success">
+                        <tr>
+                          <th scope="col" class="text-center">STT</th>
+                          <th scope="col" class="text-center">Tên thú cưng</th>
+                          <th scope="col" class="text-center">Hình ảnh</th>
+                          <th scope="col" class="text-center">Thông tin thú cưng</th>
+                          <th scope="col" class="text-center">Thông tin giá và số lượng</th>
+                          <th scope="col" class="text-center">Tổng tiền</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let orderItem of orderItems; index as indexOfelement">
+                          <td class="text-center">
+                            {{ indexOfelement + 1 }}
+                          </td>
+                          <th scope="row" class="text-center">
+                            <div class="media align-items-center">
+                              <div class="media-body">
+                                <span class="mb-0 text-sm">{{ orderItem.ProductName }}</span>
+                              </div>
+                            </div>
+                          </th>
+                          <td class="text-center">
+                            <img  alt="{{ orderItem.ProductName }}" src="{{ orderItem.ProductImage }}" class="display-img"/>
+                          </td>
+                          <td class="text-center">
+                            Màu sắc: {{ orderItem.ColorTitle }} <br>
+                            Kích cỡ: {{ orderItem.SizeTitle }} <br>
+                            Tuổi: {{ orderItem.AgeTitle }} <br>
+                            Giới tính: {{ orderItem.SexTitle }}
+                          </td>
+                          <td class="text-center">
+                            Giá gốc: {{ orderItem.Price|number: '4.0-2'}} VNĐ<br>
+                            Giảm giá: {{ orderItem.Discount }}% <br>
+                            Số lượng: {{ orderItem.Quantity }}
+                          </td>
+                          <td class="text-center">
+                            {{ orderItem.Total|number: '4.0-2' }} VNĐ
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div *ngIf="firstload" class="card-body loading-form">
+            <span *ngIf="firstload" class="spinner-border spinner-border-lg"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

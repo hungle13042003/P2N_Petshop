@@ -1,0 +1,38 @@
+.my-media__container {
+    min-height: 300px;
+    border: 1px solid #32325d;
+    padding: 15px;
+}
+
+.my-media__item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.my-media__empty-text {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.my-media__btn-group {
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.my-media__item-image {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.my-media__image {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    border-radius: 3%;
+}

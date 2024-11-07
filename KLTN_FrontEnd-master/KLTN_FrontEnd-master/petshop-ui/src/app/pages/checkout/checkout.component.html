@@ -1,0 +1,142 @@
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Thanh toán</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div class="w3l_banner_nav_right">
+        <!-- about -->
+        <div class="privacy about">
+            <h3 style="font-family: Arial, Helvetica, sans-serif;" id="view-checkout">Thanh <span>toán</span></h3>
+
+            <div class="checkout-right">
+                <h4 style="font-family: Arial, Helvetica, sans-serif; text-transform: capitalize;">Tổng loại sản phẩm: <span>{{ count }} loại</span></h4>
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Hình ảnh</th>
+                            <th>Số lượng</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Tổng giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rem1" *ngFor=" let item of cartItemList">
+                            <td class="invert">{{ item.Id }}</td>
+                            <td>
+                                <a routerLink="/pets/{{ item.ProductDetailId}}"><img src="{{ item.ProductImage}}" alt=" " class="display-img"></a>
+                            </td>
+                            <td class="invert">
+                                <div class="quantity">
+                                    <div class="quantity-select">
+                                        <div class="entry value" style="color: black;"><span> {{ item.Quantity }}</span></div>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td class="invert">{{ item.ProductTitle}}</td>
+                            <td class="invert"> {{ item.PriceDiscount| number: '4.0-2'}} VNĐ</td>
+                            <td class="invert"> {{ item.TotalPriceItem| number: '4.0-2'}} VNĐ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="checkout-left">
+                <div class="col-md-4 checkout-left-basket" style="width: 40%">
+                    <h4>Mặt hàng thanh toán</h4>
+                    <ul>
+                        <li *ngFor="let item of cartItemList" style="color: grey;"> {{ item.ProductTitle }} <span> {{ item.TotalPriceItem | number: '4.0-2'}} VNĐ </span></li>
+                    </ul>
+                    <ul>
+                        <hr class="my-hr">
+                        <li><b style="color: black;">Tổng tiền <span>{{ total | number: '4.0-2'}} VNĐ</span></b></li>
+                    </ul>
+                </div>
+                <div class="col-md-8 address_form_agile" style="width: 52%">
+                    <h4 id="target">Thông tin thanh toán</h4>
+                    <div class="alert alert-danger" role="alert" *ngIf=" message != ''">
+                        <strong>{{ message }}</strong>
+                    </div>
+                    <form role="form" [formGroup]="form" (ngSubmit)="CreateOrder()">
+                        <div class="controls">
+                            <label class="control-label">Họ tên: </label>
+                            <div class="form-group">
+                                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" formControlName="Name" placeholder="Họ và tên *" type="text">
+                                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Name.errors.required" style="color: red; font-size: 12px;">Vui lòng điền họ tên</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Email:</label>
+                            <div class="form-group">
+                                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" formControlName="Email" placeholder="Email *" type="Email">
+                                <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Email.errors.required" style="color: red; font-size: 12px;">Vui lòng điền địa chỉ email</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Số điện thoại: </label>
+                            <div class="form-group">
+                                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Phone.errors }" formControlName="Phone" placeholder="Số điện thoại *" type="text">
+                                <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Phone.errors.required" style="color: red; font-size: 12px;">Vui lòng điền số điện thoại</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Địa chỉ: </label>
+                            <div class="form-group">
+                                <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Address.errors }" formControlName="Address" placeholder="Địa chỉ *" type="text" rows="4"></textarea>
+                                <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Address.errors.required" style="color: red; font-size: 12px;">Vui lòng điền địa chỉ liên hệ</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Ghi chú: </label>
+                            <div class="form-group">
+                                <textarea class="form-control" [ngClass]="{ 'is-invalid': submitted}" formControlName="Note" placeholder="Ghi chú" type="text" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Thanh toán: </label>
+                            <div class="form-group">
+                                <input type="radio" id="typepayment1" name = "typepaymentid" (click)="UpdateTypePayment(10)" style="margin: 10px 0px 0px;" checked>
+                                <label for="typepayment1" style="font-size:15px; font-weight: 500;">&ensp;Khi nhận hàng</label><br>
+                                <input type="radio" id="typepayment2" name="typepaymentid" (click)="UpdateTypePayment(20)">
+                                <label for="typepayment2" style="font-size:15px; font-weight: 500;">&ensp;Momo</label><br>
+                                <input type="radio" id="typepayment3" name="typepaymentid" (click)="UpdateTypePayment(30)">
+                                <label for="typepayment3" style="font-size:15px; font-weight: 500;">&ensp;Vn Pay</label>
+                            </div>
+                        </div>
+                        <div style="display: inline-flex; flex: 1; float: right;">
+                            <div class="text-center">
+                                <span class="spinner-border-sm mr-1"></span>
+                                <button [disabled]="loading" type="submit" class="btn btn-primary my-4">
+                                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                  Đặt hàng
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        </div>
+        <!-- //about -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- //banner -->

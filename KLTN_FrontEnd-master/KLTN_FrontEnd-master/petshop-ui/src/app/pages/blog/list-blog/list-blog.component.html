@@ -1,0 +1,162 @@
+<div class="products-breadcrumb" id="target1" #target>
+  <div class="container">
+      <ul>
+          <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+          <li>Tin tức</li>
+      </ul>
+  </div>
+</div>
+<section class="section" style="margin-top:20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-top clearfix">
+                                <p class="pull-left" style="font-size: 20px;"><b>Tin tức mới <a href="#"><i class="fa fa-rss"></i></a></b></p>
+                            </div><!-- end blog-top -->
+
+                            <div class="blog-list clearfix">
+                                <div *ngFor="let blog of blogs">
+                                    <div class="blog-box row">
+                                        <div class="col-md-4">
+                                            <div class="post-media">
+                                                <a routerLink="/blogs/{{blog.Id}}" title="">
+                                                    <img src={{blog.Image}} alt="" class="img-fluid">
+                                                    <div class="hovereffect"></div>
+                                                </a>
+                                            </div><!-- end media -->
+                                        </div><!-- end col -->
+
+                                        <div class="blog-meta big-meta col-md-8">
+                                            <p style="font-size: 21px; padding: 5px;"><a routerLink="/blogs/{{blog.Id}}" title=""><b>{{blog.Title}}</b></a></p>
+                                            <p style=" padding: 5px; width: 100%; overflow: hidden; display: inline-block; white-space: nowrap; text-overflow: ellipsis;"> {{blog.Content}} </p>
+                                            <p style="font-size: 15px; padding: 5px;"><i> <b>Thể loại:</b> {{blog.TypeNewsText}} &nbsp; &nbsp; <b>Người viết:</b> {{blog.CreateUserName}} &nbsp; &nbsp; <b>Ngày tạo:</b> {{ formatDateVN(blog.CreateDate) }}</i></p>
+                                        </div><!-- end meta -->
+                                    </div><!-- end blog-box -->
+
+                                    <hr class="invis">
+                                </div>
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+
+
+                        <div align="center" class="card-footer py-4" style="margin-bottom: 15px;">
+                            <nav *ngIf="pagination" aria-label="...">
+                                <ul class="pagination justify-content-end mb-0" (click)="scroll(target)">
+                                    <li class="page-item" [ngClass]="{ disabled: !pagination.HasPrevious }">
+                                        <a class="page-link" (click)="previous()">
+                                           
+                                            <span class="sr-only">Previous</span>
+                                            <span aria-hidden="true">«</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" [ngClass]="{ active: item == pagination.CurrentPage }" *ngFor="let item of listPage; let pageIndex = index">
+                                        <a class="page-link" (click)="change(item)">{{item + 1}} <span *ngIf="item == pagination.CurrentPage" class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="page-item" [ngClass]="{ disabled: !pagination.HasNext }">
+                                        <a class="page-link" (click)="next()">
+                                           
+                                            <span class="sr-only">Next</span>
+                                            <span aria-hidden="true">»</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div> 
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                       
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <p style="font-size: 24px; margin-bottom: 10px;" class="widget-title"><b>Thông tin thú vị</b></p>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div>
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nội dung bổ ích về thú cưng</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div>
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nhiều phần quà hấp dẫn</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div>
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Cách chăm sóc thú cưng tốt nhất</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <p style="font-size: 24px; margin-bottom: 10px;" class="widget-title"><b>Đánh giá thông tin</b></p>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Thông tin đa chiều, hữu ích</p>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nội dung đa dạng, chính xác</p>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nội dung mới mẽ, tin hot</p>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+        

@@ -1,0 +1,84 @@
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Giỏ hàng</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div class="w3l_banner_nav_right">
+        <!-- about -->
+        <div id="target1" class="privacy about" *ngIf=" count == 0">
+            <h3 style="font-family: Arial, Helvetica, sans-serif;">Giỏ <span>hàng trống</span></h3>
+            <div class="checkout-left">
+                <div class="col-md-8 address_form_agile">
+                    <div class="checkout-right-basket">
+                        <a routerLink="/pets">Quay lại đặt hàng<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div id="target" class="privacy about" *ngIf=" count > 0">
+            <h3 style="font-family: Arial, Helvetica, sans-serif;">Giỏ <span>hàng</span></h3>
+
+            <div class="checkout-right">
+                <!-- <h4 style="font-family: Arial, Helvetica, sans-serif;">Tổng loại thú cưng: <span>{{ count }} loại</span></h4> -->
+                <!-- <h4 style="font-family: Arial, Helvetica, sans-serif; text-align: right;"><span style="color: brown;"><b>Tổng tiền: </b></span><span>{{ total| number: '4.0-2' }} VNĐ</span></h4> -->
+                <div style="font-family: Arial, Helvetica, sans-serif; font-size: 25px;text-align: right; margin-bottom: 25px;"><span style="color: brown;"><b>Tổng tiền: </b></span><span>{{ total| number: '4.0-2' }} VNĐ</span></div>
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Hình ảnh</th>
+                            <th>Số lượng</th>
+                            <th>Loại thú cưng</th>
+                            <th>Giá</th>
+                            <th>Tổng giá</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rem1" *ngFor=" let item of cartItemList">
+                            <td class="invert">{{ item.Id }}</td>
+                            <td>
+                                <a routerLink="/details/{{ item.ProductDetailId}}/{{item.BrandId}}"><img src="{{ item.ProductImage}}" alt=" " class="display-img"></a>
+                            </td>
+                            <td class="invert">
+                                <div class="quantity">
+                                    <input class="form-control input-form" style="margin: auto;" value="{{ item.Quantity }}" name="quantity" #quantity min="1" max="{{item.QuantityProduct}}" type="number" (change)="changeQuantityItem( item.CartItemId, item.ProductDetailId, quantity.value)">
+                                </div>
+                            </td>
+                            <td class="invert">{{ item.ProductTitle}}</td>
+                            <td class="invert"> {{ item.PriceDiscount| number: '4.0-2'}} VNĐ</td>
+                            <td class="invert"> {{ item.TotalPriceItem| number: '4.0-2'}} VNĐ</td>
+                            <td class="invert">
+                                <div class="rem">
+                                    <div>
+                                        <button class="btn btn-danger" (click)="DeleteItem(item.CartItemId)">  Xoá  </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="checkout-left">
+                <div class="col-md-8 address_form_agile">
+                    <div class="checkout-right-basket">
+                        <a routerLink="/checkout">Tiến hành đặt hàng<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <!-- //about -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- //banner -->

@@ -1,0 +1,87 @@
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Đăng nhập</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div id="target" class="w3l_banner_nav_right">
+        <!-- login -->
+        <div class="w3_login">
+            <h3>P2N Pet</h3>
+            <div class="w3_login_module">
+                <div class="module form-module">
+                    <div class="toggle" id="toggle"><i class="fa fa-times fa-pencil"></i>
+                    </div>
+                    <div class="form">
+                        <h2>Đăng nhập vào hệ thống</h2>
+                        <form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" formControlName="username" placeholder="Tên đăng nhập" type="username">
+                                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                    <div *ngIf="f.username.errors.required" style="color: red; font-size: 12px;">Vui lòng điền tên đăng nhập</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input style="margin-bottom: 0px;" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password" placeholder="Mật khẩu" type="password">
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required" style="color: red; font-size: 12px;">Vui lòng điền mật khẩu</div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <span class="spinner-border-sm mr-1"></span>
+                                <button [disabled]="loading" type="submit" class="btn btn-primary my-4">
+                                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                  Đăng nhập
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="message != ''" style="text-align: center;">
+                        <strong>{{ message }}</strong>
+                    </div>
+                    <div class="cta"><a routerLink="/forget">Quên mật khẩu ?</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- //login -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- //banner -->
+<!-- newsletter-top-serv-btm -->
+<div class="newsletter-top-serv-btm">
+    <div class="container">
+        <div class="w3l_banner_nav_right">
+            <div class="col-md-4 wthree_news_top_serv_btm_grid">
+                <div class="wthree_news_top_serv_btm_grid_icon">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </div>
+                <h3>Sẵn sàng mua sắm</h3>
+                <p>Có thể truy cập trang để xem và đặt mua những thú cưng đẹp đẽ dễ thương cho bản thân nào.</p>
+            </div>
+            <div class="col-md-4 wthree_news_top_serv_btm_grid">
+                <div class="wthree_news_top_serv_btm_grid_icon">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                </div>
+                <h3>Giá cả hợp lý</h3>
+                <p>Từng loại thú cưng có mức giá phù hợp với trên thị trường. Ưu đãi với tất cả mọi thứ</p>
+            </div>
+            <div class="col-md-4 wthree_news_top_serv_btm_grid">
+                <div class="wthree_news_top_serv_btm_grid_icon">
+                    <i class="fa fa-truck" aria-hidden="true"></i>
+                </div>
+                <h3>Giao hàng nhanh chóng</h3>
+                <p>Khả năng giao thú cưng nhanh theo yêu cũng như nhận trực tiếp tại shop </p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //newsletter-top-serv-btm -->

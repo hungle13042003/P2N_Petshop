@@ -1,0 +1,118 @@
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Lịch sử đặt hàng</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div class="w3l_banner_nav_right">
+        <!-- about -->
+        <div class="privacy about" *ngIf=" existed == 0">
+            <h3 id="target1" style="font-family: Arial, Helvetica, sans-serif;">Không có đơn hàng</h3>
+            <div class="checkout-left">
+                <div class="col-md-8 address_form_agile">
+                    <div class="checkout-right-basket">
+                        <a routerLink="/index">Quay về trang chủ<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="privacy about" *ngIf=" existed == 1">
+            <h3 id="target" style="font-family: Arial, Helvetica, sans-serif;">Lịch sử <span>đặt hàng</span></h3>
+
+            <div class="checkout-right" *ngFor=" let item of orders">
+                <div>
+                    <div>
+                        <label class="my-label">Người đặt hàng: <b><i>{{ item.CustomerName}}</i></b></label>
+                    </div>
+                    <div>
+                        <label class="my-label">Email: <b><i>{{ item.Email}}</i></b></label>
+                    </div>
+                    <div>
+                        <label class="my-label">Số điện thoại: <b><i>{{ item.Phone}}</i></b></label>
+                    </div>
+                    <div>
+                        <label class="my-label">Địa chỉ giao hàng: <b><i>{{ item.Address}}</i></b></label>
+                    </div>
+                </div>
+                <div><a routerLink="/orders/{{item.OrderId}}" class="text-right-a">Chi tiết đơn hàng</a></div>
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th class="th-class">Mã đơn hàng</th>
+                            <th class="th-class">Ngày đặt hàng</th>
+                            <th class="th-class">Số loại</th>
+                            <th class="th-class">Số lượng</th>
+                            <th class="th-class">Tổng tiền</th>
+                            <th class="th-class">Hình thức / Trạng thái thanh toán</th>
+                            <!-- <th class="th-class">Địa chỉ giao hàng</th> -->
+                            <th class="th-class">Trạng thái đơn hàng</th>
+                            <th class="th-class" *ngIf=" item.StatusOrderId == 1">Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rem1">
+                            <td class="invert">#ĐH{{ item.OrderId }}</td>
+                            <td class="invert">{{ formatDateVN(item.CreateOrder) }}</td>
+                            <td class="invert"> {{ item.NumBreed}} loại</td>
+                            <td class="invert"> {{ item.NumOrder}} </td>
+                            <td class="invert"> {{ item.TotalMoney| number: '4.0-2'}} VNĐ</td>
+                            <td class="invert"> {{ item.TypePaymentName}} / {{ item.StatusPaymentName}} </td>
+                            <!-- <td class="invert"> {{ item.Address }}</td> -->
+                            <td class="invert"> <b><i>{{ item.StatusOrderText }}</i></b></td>
+                            <td class="invert" *ngIf=" item.StatusOrderId == 1">
+                                <div class="rem">
+                                    <div>
+                                        <button class="btn btn-danger" (click)="CancelOrder(item.OrderId)">  Hủy  </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr class="my-hr">
+            </div>
+            <div align="center" class="card-footer py-4">
+                <nav *ngIf="pagination" aria-label="...">
+                    <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item" [ngClass]="{ disabled: !pagination.HasPrevious }">
+                            <a class="page-link" (click)="previous()">
+                                <!-- <i class="fas fa-angle-left"></i> -->
+                                <span class="sr-only">Previous</span>
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        <li class="page-item" [ngClass]="{ active: item == pagination.CurrentPage }" *ngFor="let item of listPage; let pageIndex = index">
+                            <a class="page-link" (click)="change(item)">{{item + 1}} <span *ngIf="item == pagination.CurrentPage" class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="page-item" [ngClass]="{ disabled: !pagination.HasNext }">
+                            <a class="page-link" (click)="next()">
+                                <!-- <i class="fas fa-angle-right"></i> -->
+                                <span class="sr-only">Next</span>
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="checkout-left">
+                <div class="col-md-8 address_form_agile">
+                    <div class="checkout-right-basket">
+                        <a routerLink="/index">Quay về trang chủ<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <!-- //about -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- //banner -->

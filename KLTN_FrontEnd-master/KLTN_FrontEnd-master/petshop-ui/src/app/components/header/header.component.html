@@ -1,0 +1,85 @@
+<!-- header -->
+<div class="agileits_header">
+    <div class="w3l_offers">
+        <a routerLink="index">Ưu đãi nhiều hơn tại P2N!</a>
+    </div>
+    <div class="w3l_search" style="display: inline-block;">
+        <form role="form" [formGroup]="form" (ngSubmit)="findText()">
+            <input type="text" formControlName="findString" placeholder="Tìm kiếm sản phẩm..." [required]="false">
+            <input type="submit" value=" ">
+        </form>
+    </div>
+    <div class="product_list_header" id="headerpet1" #headerpet>
+        <form>
+            <input type="submit" name="submit" value="Xem giỏ hàng" class="button" (click)="viewCart()" />
+            <span class='badge badge-warning' id='lblCartCount' *ngIf="(cartCount$|async)!=0"> {{cartCount$ | async}} </span>
+        </form>
+    </div>
+    <div class="w3l_header_right">
+        <ul>
+            <li class="dropdown profile_details_drop" ngbDropdown>
+                <a id="userDrop" ngbDropdownToggle><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+                <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" ngbDropdownMenu="userDrop">
+                    <div class="w3ls_vegetables">
+                        <ul *ngIf="user.Id > 0">
+                            <li></li>
+                            <li><a routerLink="/profile">Thông tin của tôi</a></li>
+                            <li><a routerLink="/changepassword">Đổi mật khẩu</a></li>
+                            <li><a routerLink="/myorder">Đơn hàng của tôi</a></li>
+                            <li><a routerLink="/about">Thông tin cửa hàng</a></li>
+                            <hr/>
+                            <li><a (click)="logout()" routerLink="/index"><b>Đăng xuất</b></a></li>
+                        </ul>
+                        <ul *ngIf="!(user.Id > 0)">
+                            <li><a routerLink="/login">Đăng nhập</a></li>
+                            <li><a routerLink="/register">Đăng ký</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="w3l_header_right1">
+        <h2><a routerLink="mailer">Liên hệ</a></h2>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- script-for sticky-nav -->
+<script>
+    $(document).ready(function() {
+        var naffest = $(".agileits_header").offset().top;
+        $(window).scroll(function() {
+            var pos = $(window).scrollTop();
+            if (pos >= naffest) {
+                $(".agileits_header").addClass("fixed");
+            } else {
+                $(".agileits_header").removeClass("fixed");
+            }
+        });
+
+    });
+</script>
+<!-- //script-for sticky-nav -->
+<div style="background-color: #eeeeee; padding: 1em 0 1em;">
+    <div class="container">
+        <div class="w3ls_logo_products_left">
+            <div class="w3ls_logo_products_left_new">
+                <h1><a routerLink="/index"><b style="color: #bf9000;">PetShop</b></a></h1>
+            </div>
+        </div>
+        <div class="w3ls_logo_products_left1" style="margin-left: 85px;">
+            <ul class="special_items">
+                <li><a routerLink="/typeproduct/10"><span style="font-size: 20px;">Thú cưng</span></a><i>/</i></li>
+                <li><a routerLink="/blogs"><span style="font-size: 20px;">Tin tức</span></a></li>
+            </ul>
+        </div>
+        <div class="w3ls_logo_products_left1" style="margin-left: 158px;">
+            <ul class="phone_email">
+                <li><i class="fa fa-phone" aria-hidden="true"></i><span style="font-size: 20px;">(+84) 386998130</span></li>
+                <li style="margin-right: 0px;"><i class="fa fa-envelope-o" aria-hidden="true"></i><a routerLink="/mailer"><span style="font-size: 20px;">p2npetshop@gmail.com</span></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //header -->

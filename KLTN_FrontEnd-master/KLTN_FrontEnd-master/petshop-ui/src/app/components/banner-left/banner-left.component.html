@@ -1,0 +1,118 @@
+<div class="w3l_banner_nav_left" style="width:13.5%">
+    <nav class="navbar nav_bottom">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header nav_2">
+            <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+            <ul class="nav navbar-nav nav_1">
+                <li *ngFor="let p of typeProducts" ngbDropdown>
+                  <a [id]="proDrop" ngbDropdownToggle> <b>{{ p.TypeProductName }}</b> <span class="caret down-left"></span></a>
+                  <div>
+                      <div class=" drop-move w3ls_vegetables" ngbDropdownMenu="proDrop">
+                        <ul class="nav navbar-nav nav_1" *ngIf="p.TypeProductId == 10">
+                          <li>
+                            <a routerLink="/typeproduct/{{p.TypeProductId}}"> <b style="margin-top: 5%;">Tất cả {{ p.TypeProductName }}</b></a>
+                            <!-- <hr class="hr-line"> -->
+                          </li>
+                          <li *ngFor="let item of breedAlls" ngbDropdown>
+                            <a [id]="breedDrop" ngbDropdownToggle> <b>Loài {{ item.BreedName }}</b> <span class="caret down-left"></span></a>
+                            <div>
+                                <div class=" drop-move w3ls_vegetables" ngbDropdownMenu="breedDrop">
+                                    <ul>
+                                        <li>
+                                            <a style="margin-top:15px;" routerLink="/category/root/{{ item.Id}}"> <b style="margin-top: 5%;">Tất cả {{ item.BreedName }}</b></a>
+                                            <hr class="hr-line">
+                                        </li>
+                                    </ul>
+                                    <ul *ngFor="let child of item.BreedChild">
+                                        <li>
+                                            <a routerLink="/category/child/{{ child.Id }}"> {{ child.BreedName }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <ul class="nav navbar-nav nav_1" *ngIf="p.TypeProductId == 20" style="width:220px;">
+                          <li>
+                            <a routerLink="/typeproduct/{{p.TypeProductId}}"> <b style="margin-top: 5%;">Tất cả {{ p.TypeProductName }}</b></a>
+                            <!-- <hr class="hr-line"> -->
+                          </li>
+                          <li *ngFor="let item of thucan" ngbDropdown>
+                            <a [id]="thucanDrop" ngbDropdownToggle> <b>{{ item.CategoryName }}</b> <span class="caret down-left"></span></a>
+                            <div>
+                                <div class=" drop-move w3ls_vegetables" ngbDropdownMenu="thucanDrop">
+                                    <ul>
+                                        <li>
+                                            <a style="margin-top:15px;" routerLink="/category/cateroot/{{ item.Id}}"> <b style="margin-top: 5%;">Tất cả {{ item.CategoryName }}</b></a>
+                                            <hr class="hr-line">
+                                        </li>
+                                    </ul>
+                                    <ul *ngFor="let child of item.CategoryChill">
+                                        <li>
+                                            <a routerLink="/category/catechild/{{ child.Id }}"> {{ child.CategoryName }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <ul class="nav navbar-nav nav_1" *ngIf="p.TypeProductId == 30" style="width:230px;">
+                          <li>
+                            <a routerLink="/typeproduct/{{p.TypeProductId}}"> <b style="margin-top: 5%;">Tất cả {{ p.TypeProductName }}</b></a>
+                            <!-- <hr class="hr-line"> -->
+                          </li>
+                          <li *ngFor="let item of phukien" ngbDropdown>
+                            <a [id]="phukienDrop" ngbDropdownToggle> <b>{{ item.CategoryName }}</b> <span class="caret down-left"></span></a>
+                            <div>
+                                <div class=" drop-move w3ls_vegetables" ngbDropdownMenu="phukienDrop">
+                                    <ul>
+                                        <li>
+                                            <a style="margin-top:15px;" routerLink="/category/cateroot/{{ item.Id}}"> <b style="margin-top: 5%;">Tất cả {{ item.CategoryName }}</b></a>
+                                            <hr class="hr-line">
+                                        </li>
+                                    </ul>
+                                    <ul *ngFor="let child of item.CategoryChill">
+                                        <li>
+                                            <a routerLink="/category/catechild/{{ child.Id }}"> {{ child.CategoryName }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                          </li>
+                        </ul>
+
+                      </div>
+                  </div>
+                </li>
+
+                <li ngbDropdown>
+                    <a id="supDrop" ngbDropdownToggle> <b>Phân phối</b> <span class="caret down-left"></span></a>
+                    <div>
+                        <div class="drop-move w3ls_vegetables" ngbDropdownMenu="supDrop">
+                            <ul>
+                                <li>
+                                    <a style="margin-top:15px;" routerLink="/pets"> <b style="margin-top: 5%;">Tất cả Nhà phân phối</b></a>
+                                    <hr class="hr-line">
+                                </li>
+                            </ul>
+                            <ul *ngFor="let item of suppliers">
+                                <li>
+                                    <a routerLink="/category/sup/{{ item.Id }}"> {{ item.SupplierName}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</div>

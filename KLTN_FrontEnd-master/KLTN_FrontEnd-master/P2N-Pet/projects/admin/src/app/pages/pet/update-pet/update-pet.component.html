@@ -1,0 +1,106 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-0">
+    <!-- bg-gradient-danger -->
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="container-fluid my-form">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-xl-6 col-md-12">
+                                <h3 class="mb-0">Chỉnh sửa nguồn gốc</h3>
+                            </div>
+                            <div class="col-xl-6 col-md-12 text-right">
+                                <button *ngIf="!firstload" (click)="onSubmit()" [disabled]="loading" class="btn btn-primary"><span
+                    *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Lưu</button>
+                                <a [routerLink]="['/admin/list-pet']" class="btn btn-default">Hủy</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!firstload" class="card-body">
+                        <form [formGroup]="form">
+                            <h6 class="heading-small text-muted mb-4">Thông tin thú cưng</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="BreedId">Tên thú cưng</label>
+                                            <select class="form-control form-control-alternative" placeholder="Tên thú cưng" [ngClass]="{ 'is-invalid': submitted && f.BreedId.errors }" formControlName="BreedId">
+                                              <option *ngFor="let item of breedSelection" [ngValue]="item.Id">
+                                                {{ item.Name }}
+                                              </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.BreedId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.BreedId.errors.required">Vui lòng chọn tên thú cưng</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="SupplierId">Tên nhà cung cấp</label>
+                                            <select class="form-control form-control-alternative" placeholder="Tên nhà cung cấp" [ngClass]="{ 'is-invalid': submitted && f.SupplierId.errors }" formControlName="SupplierId">
+                                              <option *ngFor="let item of supplierSelection" [ngValue]="item.Id">
+                                                {{ item.Name }}
+                                              </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.SupplierIderrors" class="invalid-feedback">
+                                                <div *ngIf="f.SupplierId.errors.required">Vui lòng chọn tên nhà cung cấp</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="CategoryId">Tên sản phẩm</label>
+                                            <select class="form-control form-control-alternative" placeholder="Tên sản phẩm" formControlName="CategoryId">
+                                              <option *ngFor="let item of categorySelection" [ngValue]="item.Id">
+                                                {{ item.Title }}
+                                              </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Status">Trạng thái</label>
+                                            <select class="form-control form-control-alternative" placeholder="Trạng thái" [ngClass]="{ 'is-invalid': submitted && f.Status.errors }" formControlName="Status">
+                                              <option *ngFor="let item of petStatusOptions" [ngValue]="item.Id">
+                                                {{ item.Title }}
+                                              </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.Status.errors" class="invalid-feedback">
+                                                <div *ngIf="f.Status.errors.required">Vui lòng chọn trạng thái</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Content">Nội dung</label>
+                                            <textarea rows="5" class="form-control form-control-alternative" placeholder="Nhập nội dung" [ngClass]="{ 'is-invalid': submitted && f.Content.errors }" formControlName="Content">
+                                            </textarea>
+                                            <div *ngIf="submitted && f.Content.errors" class="invalid-feedback">
+                                                <div *ngIf="f.Content.errors.required">Vui lòng điền nội dung</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="firstload" class="card-body loading-form">
+                        <span *ngIf="firstload" class="spinner-border spinner-border-lg"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

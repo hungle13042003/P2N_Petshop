@@ -1,0 +1,263 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+    <!-- bg-gradient-danger -->
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card bg-secondary shadow">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3 col-12">
+                                        <h3 class="mb-0" id="target">Tìm kiếm</h3>
+                                    </div>
+                                    <div class="col-md-9 col-12 text-right">
+                                        <button type="submit" class="btn btn-outline-primary" (click)="onSearch()">Tìm kiếm</button>
+                                        <button type="button" class="btn btn-outline-dark" name="clear-search" (click)="clearForm()">Nhập lại</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4" *ngIf=" typeProductId == 10">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.BreedId">Thú cưng</label>
+                                                <select class="form-control form-control-alternative" placeholder="Thú cưng" (click)="getNormalSupplierPetDetailSelection()" [(ngModel)]="petDetailCondition.BreedId" [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let item of breedSelection" [ngValue]="item.Id">
+                                    {{ item.Name }}
+                                  </option>
+                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4" *ngIf=" typeProductId != 10">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petCondition.CategoryId">Tên sản phẩm</label>
+                                                <select class="form-control form-control-alternative" placeholder="Tên sản phẩm" [(ngModel)]="petDetailCondition.CategoryId" [ngModelOptions]="{standalone: true}">
+                                                    <option value="0"></option>
+                                                    <option *ngFor="let item of categorySelection" [ngValue]="item.Id">
+                                                  {{ item.Title }}
+                                                </option>
+                                              </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.SupplierId">Nhà cung cấp</label>
+                                                <select class="form-control form-control-alternative" placeholder="Nhà cung cấp" (click)="getNormalBreedPetDetailSelection()" [(ngModel)]="petDetailCondition.SupplierId" [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let item of supplierSelection" [ngValue]="item.Id">
+                                    {{ item.Name }}
+                                  </option>
+                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.ColorId">Màu sắc</label>
+                                                <select class="form-control form-control-alternative" placeholder="Màu sắc" [(ngModel)]="petDetailCondition.ColorId" [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let item of colorSelection" [ngValue]="item.Id">
+                                    {{ item.Title }}
+                                  </option>
+                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.SizeId">Kích cỡ</label>
+                                                <select class="form-control form-control-alternative" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}">
+                                      <option *ngFor="let item of sizeSelection" [ngValue]="item.Id">
+                                        {{ item.Title }}
+                                      </option>
+                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.AgeId">Tuổi</label>
+                                                <select class="form-control form-control-alternative" placeholder="Tuổi" [(ngModel)]="petDetailCondition.AgeId" [ngModelOptions]="{standalone: true}">
+                                                  <option *ngFor="let item of ageSelection" [ngValue]="item.Id">
+                                                    {{ item.Title }}
+                                                  </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.SexId">Giống</label>
+                                                <select class="form-control form-control-alternative" placeholder="Giống" [(ngModel)]="petDetailCondition.SexId" [ngModelOptions]="{standalone: true}">
+                                                  <option *ngFor="let item of sexSelection" [ngValue]="item.Id">
+                                                    {{ item.Title }}
+                                                  </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.StatusDetailId">Trạng thái bán</label>
+                                                <select class="form-control form-control-alternative" placeholder="Trạng thái bán" [(ngModel)]="petDetailCondition.StatusDetailId" [ngModelOptions]="{standalone: true}">
+                                                  <option *ngFor="let item of statusDetailSelection" [ngValue]="item.Id">
+                                                    {{ item.Title }}
+                                                  </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="petDetailCondition.Status">Trạng thái</label>
+                                                <select class="form-control form-control-alternative" placeholder="Trạng thái" [(ngModel)]="petDetailCondition.Status" [ngModelOptions]="{standalone: true}">
+                                                  <option *ngFor="let item of petDetailStatusOptions" [ngValue]="item.Id">
+                                                    {{ item.Title }}
+                                                  </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 col-12">
+                            <h3 class="mb-0" *ngIf=" typeProductId == 10" style="color: red;"><b>BẢNG THÚ CƯNG</b></h3>
+                            <h3 class="mb-0" *ngIf=" typeProductId == 20" style="color: red;"><b>BẢNG THỨC ĂN</b></h3>
+                            <h3 class="mb-0" *ngIf=" typeProductId == 30" style="color: red;"><b>BẢNG PHỤ KIỆN</b></h3>
+                        </div>
+                        <div class="col-md-7 col-12 text-right">
+                            <button type="button" class="btn btn-outline-primary" *ngIf=" typeProductId != 10" name="clear-search" (click)="getListProductDetail(10)">Thú cưng</button>
+                            <button type="button" class="btn btn-outline-dark" *ngIf=" typeProductId != 20" name="clear-search" (click)="getListProductDetail(20)">Thức ăn</button>
+                            <button type="button" class="btn btn-outline-success" *ngIf=" typeProductId != 30" name="clear-search" (click)="getListProductDetail(30)">Phụ kiện</button>
+                            <button type="button" class="btn btn-success" style="color: #fff; font-weight: bold;" (click)="routingForm()">Tạo mới</button>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                <div class="col-md-3 col-12">
+                    <h3 class="mb-0">Bảng thông tin thú cưng</h3>
+                </div>
+                <div class="col-md-9 col-12 text-right">
+                    <a [routerLink]="['/admin/petdetail/create']" class="btn btn-success">Tạo mới</a>
+                </div>
+            </div> -->
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="table-success">
+                            <tr>
+                                <th scope="col" class="text-center">STT</th>
+                                <th scope="col" class="text-center">Thú cưng</th>
+                                <th scope="col" class="text-center">Thông tin chi tiết</th>
+                                <th scope="col" class="text-center">Thông tin giá</th>
+                                <th scope="col" class="text-center">Trạng thái</th>
+                                <th scope="col" class="text-center">Thông tin chỉnh sửa</th>
+                                <th scope="col" class="text-center">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let petDetail of petDetails; index as indexOfelement">
+                                <th scope="row" class="text-center">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm">
+                                                {{ (pagination.CurrentPage*pagination.Limit) + indexOfelement + 1 }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row" class="text-center">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" *ngIf="typeProduct == 10">
+                                                Tên thú cưng: {{ petDetail.ProductName }} <br>
+                                                Nhà cung cấp: {{ petDetail.SupplierName }}
+                                            </span>
+                                            <span class="mb-0 text-sm" *ngIf="typeProduct != 10">
+                                                Tên sản phẩm: {{ petDetail.ProductName }} <br>
+                                                Nhà cung cấp: {{ petDetail.SupplierName }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="text-center">
+                                    <span *ngIf="petDetail.ColorTitle != '' ">Màu sắc: {{ petDetail.ColorTitle }} <br></span>
+                                    <span *ngIf="petDetail.SizeTitle != '' ">Kích cỡ: {{ petDetail.SizeTitle }} <br></span>
+                                    <span *ngIf="petDetail.AgeTitle != '' ">Tuổi: {{ petDetail.AgeTitle }} <br></span>
+                                    <span *ngIf="petDetail.SexTitle != '' ">Giống: {{ petDetail.SexTitle }}<br></span>
+                                    <span *ngIf="petDetail.Quantity != '' ">Số lượng: {{ petDetail.Quantity }}</span>
+                                </td>
+                                <td class="text-center">
+                                    Giá: {{ petDetail.Price|number: '4.0-2'}} VNĐ<br> Giảm giá: {{ petDetail.Discount }}%
+                                </td>
+                                <td class="text-center">
+                                    Trạng thái bán: {{ petDetail.StatusDetailTitle }} <br> Trạng thái: {{ petDetail.StatusText }}
+                                </td>
+                                <td class="text-center">
+                                    Người tạo: {{ petDetail.CreateUserName }} <br> Ngày tạo: {{ formatDateVN(petDetail.CreateDate) }}<br> Người cập nhật: {{ petDetail.UpdateUserName }} <br> Ngày cập nhật: {{ formatDateVN(petDetail.UpdateDate) }}
+                                </td>
+                                <td class="text-center">
+                                    <!-- <div ngbDropdown placement="bottom-right"> -->
+                                    <a [tooltip]="ViewContent" contentType="template"
+                                      class="btn btn-icon btn-info custom-btn" routerLink="/admin/petdetail/view/{{petDetail.Id}}">
+                                        <i class='ni ni-laptop'></i>
+                                    </a>
+                                    <a [tooltip]="UpdateContent" contentType="template"
+                                      class="btn btn-icon btn-primary custom-btn" routerLink="/admin/petdetail/update/{{petDetail.Id}}">
+                                        <i class='ni ni-ruler-pencil'></i>
+                                    </a>
+                                    <button [tooltip]="DeleteContent" contentType="template"
+                                      class="btn btn-icon btn-danger custom-btn" (click)="confirmAlertDelete(petDetail.Id)">
+                                        <i class='ni ni-scissors'></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4">
+                    <nav *ngIf="pagination" aria-label="...">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item" [ngClass]="{ disabled: !pagination.HasPrevious }">
+                                <a class="page-link" (click)="previous()">
+                                    <i class="fas fa-angle-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item" [ngClass]="{ active: item == pagination.CurrentPage }" *ngFor="let item of listPage; let pageIndex = index">
+                                <a class="page-link" (click)="change(item)">{{item + 1}} <span *ngIf="item == pagination.CurrentPage" class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item" [ngClass]="{ disabled: !pagination.HasNext }">
+                                <a class="page-link" (click)="next()">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #UpdateContent>
+  <label for=""> Cập nhật </label>
+</ng-template>
+<ng-template #ViewContent>
+  <label> Xem chi tiết </label>
+</ng-template>
+<ng-template #DeleteContent>
+  <label> Xoá </label>
+</ng-template>

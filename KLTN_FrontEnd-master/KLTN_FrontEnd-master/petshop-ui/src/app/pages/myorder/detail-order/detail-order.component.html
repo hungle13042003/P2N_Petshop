@@ -1,0 +1,66 @@
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Chi tiết đơn hàng</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div class="w3l_banner_nav_right">
+        <!-- about -->
+        <div class="privacy about">
+            <h3 id="target" style="font-family: Arial, Helvetica, sans-serif;">Chi tiết đơn hàng</h3>
+
+            <div class="checkout-right">
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th class="th-class">STT</th>
+                            <th class="th-class">Hình ảnh</th>
+                            <th class="th-class">Số lượng</th>
+                            <th class="th-class">Loại sản phẩm</th>
+                            <th class="th-class">Giá</th>
+                            <th class="th-class">Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rem1" *ngFor=" let item of orders">
+                            <td class="invert">{{ item.Id }}</td>
+                            <td class="invert-image">
+                                <a routerLink="/pets/{{ item.ProductDetailId}}"><img src="{{ item.ProductImage}}" alt=" " class="img-responsive"></a>
+                            </td>
+                            <td class="invert">
+                                <div class="quantity">
+                                    <div class="quantity-select">
+                                        <div class="entry value" style="color: black;"><span> {{ item.Quantity }}</span></div>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td class="invert">{{ item.ProductTitle}}</td>
+                            <td class="invert"> {{ item.PriceDiscount| number: '4.0-2'}} VNĐ</td>
+                            <td class="invert"> {{ item.TotalPriceItem| number: '4.0-2'}} VNĐ</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr class="my-hr">
+            </div>
+            <div class="checkout-left">
+                <div class="col-md-8 address_form_agile">
+                    <div class="checkout-right-basket">
+                        <a routerLink="/myorder">Quay về Lịch sử đặt hàng<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <!-- //about -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- //banner -->

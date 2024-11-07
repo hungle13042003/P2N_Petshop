@@ -1,0 +1,223 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Số lượng</h5>
+                    <p></p>
+                    <span class="h3 font-weight-bold mb-0">Khách hàng: {{ statistics.TotalCustomer }}</span> <br>
+                    <span class="h3 font-weight-bold mb-0">Nhân viên: {{ statistics.TotalManager }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-users"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-nowrap"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Số thú cưng</h5>
+                    <p></p>
+                    <span class="h3 font-weight-bold mb-0">Cửa hàng có: {{ statistics.TotalProductQuatityInStore }}</span> <br>
+                    <span class="h3 font-weight-bold mb-0">Đã bán: {{ statistics.TotalProductQuantitySold }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                      <i class="ni ni-single-copy-04"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-nowrap"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Vốn hiện tại</h5>
+                    <br>
+                    <span class="h3 font-weight-bold mb-0">{{statistics.TotalMoneyProductInStore|number:'4.0-2'}} Đ</span><br>
+                    <span class="h3 font-weight-bold mb-0"></span>
+                    <p></p>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                      <i class="ni ni-curved-next"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-nowrap"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Tổng doanh thu</h5>
+                    <br>
+                    <span class="h3 font-weight-bold mb-0">{{ statistics.TotalAmountSold|number:'4.0-2' }} Đ</span>
+                    <span class="h3 font-weight-bold mb-0"></span>
+                    <p></p>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                      <i class="ni ni-sound-wave"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-nowrap"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-8 mb-5 mb-xl-0">
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <div class="row">
+                    <div class="col-md-10 col-12">
+                        <h3 class="mb-0">Bảng thống kê loại thú cưng</h3>
+                    </div>
+                </div>
+            </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="table-success">
+                    <tr>
+                      <th scope="col" class="text-center">STT</th>
+                      <th scope="col" class="text-center">Tên thú cưng</th>
+                      <th scope="col" class="text-center">Số lượng</th>
+                      <th scope="col" class="text-center">Tổng tiền</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let statistic of statisticsBreed; index as indexOfelement">
+                      <th scope="row" class="text-center">
+                        <div class="media align-items-center">
+                          <div class="media-body">
+                            <span class="mb-0 text-sm">{{ (pagination.CurrentPage*pagination.Limit) + indexOfelement + 1 }}</span>
+                          </div>
+                        </div>
+                      </th>
+                      <th scope="row" class="text-center">
+                        <div class="media align-items-center">
+                          <div class="media-body">
+                            <span class="mb-0 text-sm">{{ statistic.BreedName }}</span>
+                          </div>
+                        </div>
+                      </th>
+                      <td class="text-center">
+                        {{ statistic.TotalQuantityBreed }}
+                      </td>
+                      <td class="text-center">
+                        {{ statistic.TotalMoneyBreed|number:'4.0-2' }} VNĐ
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer py-4">
+                <nav *ngIf="pagination" aria-label="...">
+                  <ul class="pagination justify-content-end mb-0">
+                    <li class="page-item" [ngClass]="{ disabled: !pagination.HasPrevious }">
+                      <a class="page-link" (click)="previous()">
+                        <i class="fas fa-angle-left"></i>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <li class="page-item" [ngClass]="{ active: item == pagination.CurrentPage }" *ngFor="let item of listPage; let pageIndex = index">
+                      <a class="page-link" (click)="change(item)">{{item + 1}} <span *ngIf="item == pagination.CurrentPage" class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item" [ngClass]="{ disabled: !pagination.HasNext }">
+                      <a class="page-link" (click)="next()">
+                        <i class="fas fa-angle-right"></i>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4">
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <div class="row">
+                    <div class="col-md-10 col-12">
+                        <h3 class="mb-0">Bảng thống kê theo tháng</h3>
+                    </div>
+                </div>
+            </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="table-success">
+                    <tr>
+                      <th scope="col" class="text-center">Tháng</th>
+                      <th scope="col" class="text-center">Số đơn hàng</th>
+                      <th scope="col" class="text-center">Tổng tiền</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let statistic of statistics.AStatisticsMonthSaleModels">
+                      <th scope="row" class="text-center">
+                        <div class="media align-items-center">
+                          <div class="media-body">
+                            <span class="mb-0 text-sm">Tháng {{ statistic.MonthSale }}</span>
+                          </div>
+                        </div>
+                      </th>
+                      <td class="text-center">
+                        {{ statistic.TotalOrder }}
+                      </td>
+                      <td class="text-center">
+                        {{ statistic.TotalMoneySale|number:'4.0-2' }} VNĐ
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer py-4">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body"></div>
+  </div>
+  

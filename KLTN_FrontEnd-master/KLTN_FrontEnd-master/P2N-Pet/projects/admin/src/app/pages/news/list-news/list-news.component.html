@@ -1,0 +1,237 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+  <!-- bg-gradient-danger -->
+  <div class="container-fluid">
+      <div class="header-body">
+          <!-- Card stats -->
+          <div class="row">
+              <div class="col">
+                  <div class="card">
+                      <div class="card bg-secondary shadow">
+                          <div class="card-header">
+                              <div class="row align-items-center">
+                                  <div class="col-md-3 col-12">
+                                      <h3 class="mb-0">Tìm kiếm</h3>
+                                  </div>
+                                  <div class="col-md-9 col-12 text-right">
+                                      <button type="submit" class="btn btn-outline-primary" (click)="onSearch()">
+                                        Tìm kiếm
+                                      </button>
+                                      <button type="button" class="btn btn-outline-dark" name="clear-search" (click)="clearForm()">
+                                        Nhập lại
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-body">
+                              <div class="pl-lg-4">
+                                  <div class="row">
+                                      <div class="col-lg-3 col-md-4">
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="newsCondition.Title">Tiêu đề</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control form-control-alternative"
+                        placeholder="Nhập tiều đề"
+                        [(ngModel)]="newsCondition.Title"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-4">
+                    <div class="form-group">
+                      <label
+                        class="form-control-label"
+                        for="brandCondition.TypeNewsId"
+                        >Loại tin tức</label
+                      >
+                      <select
+                        class="form-control form-control-alternative"
+                        placeholder="Trạng thái"
+                        [(ngModel)]="newsCondition.TypeNewsId"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option
+                          *ngFor="let item of typeNewsSelection"
+                          [ngValue]="item.Id"
+                        >
+                          {{ item.Title }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+
+                  <div class="col-lg-3 col-md-4">
+                    <div class="form-group">
+                      <label
+                        class="form-control-label"
+                        for="brandCondition.Status"
+                        >Trạng thái</label
+                      >
+                      <select
+                        class="form-control form-control-alternative"
+                        placeholder="Trạng thái"
+                        [(ngModel)]="newsCondition.Status"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option
+                          *ngFor="let item of newsStatusOptions"
+                          [ngValue]="item.Id"
+                        >
+                          {{ item.Title }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+<!-- Table -->
+<div class="row">
+  <div class="col">
+    <div class="card shadow">
+      <div class="card-header border-0">
+        <div class="row">
+          <div class="col-md-3 col-12">
+            <h3 class="mb-0">Bảng tin tức</h3>
+          </div>
+          <div class="col-md-9 col-12 text-right">
+            <a [routerLink]="['/admin/news/create']" class="btn btn-success">Tạo mới</a>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+          <thead class="table-success">
+            <tr>
+              <th scope="col" class="text-center">STT</th>
+              <th scope="col" class="text-center">Tiêu đề</th>
+              <th scope="col" class="text-center">Nội dung</th>
+              <th scope="col" class="text-center">Nội dung HTML</th>
+              <th scope="col" class="text-center">Loại tin tức</th>
+              <th scope="col" class="text-center">Trạng thái</th>
+              <th scope="col" class="text-center">Thông tin tạo</th>
+              <th scope="col" class="text-center">Thông tin cập nhật</th>
+              <th scope="col" class="text-center">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let news of newsList; index as indexOfelement">
+              <td class="text-center">
+                {{ (pagination.CurrentPage*pagination.Limit) + indexOfelement + 1 }}
+              </td>
+              <th scope="row" class="text-center">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">
+                      {{ news.Title }}
+                    </span>
+                  </div>
+                </div>
+              </th>
+              <td class="text-center">
+                <div style="width: 300px; overflow: hidden; display: inline-block; white-space: nowrap; text-overflow: ellipsis;">
+                  {{ news.Content }}
+                </div>
+              </td>
+              <td class="text-center">
+                <div style="width: 300px; overflow: hidden; display: inline-block; white-space: nowrap; text-overflow: ellipsis;">
+                  {{ news.HtmlContent }}
+                </div>
+              </td>
+              <td class="text-center">
+                {{ news.TypeNewsText }}
+              </td>
+              <td class="text-center">
+                {{ news.StatusText }}
+              </td>
+              <td class="text-center">
+                Người tạo: {{ news.CreateUserName }} <br />
+                Ngày tạo: {{ formatDateVN(news.CreateDate) }}
+              </td>
+              <td class="text-center">
+                Người cập nhật: {{ news.UpdateUserName }} <br />
+                Ngày cập nhật: {{ formatDateVN(news.UpdateDate) }}
+              </td>
+              <td class="text-center">
+                <!-- <div ngbDropdown placement="bottom-right"> -->
+                <!-- <a class="btn btn-icon btn-info custom-btn" href="javascript:void(0)">
+                      <i class='ni ni-laptop'></i>
+                    </a> -->
+                <a [tooltip]="UpdateContent" contentType="template"
+                  class="btn btn-icon btn-primary custom-btn"
+                  routerLink="/admin/news/update/{{ news.Id }}"
+                >
+                  <i class="ni ni-ruler-pencil"></i>
+                </a>
+                <button [tooltip]="DeleteContent" contentType="template"
+                  class="btn btn-icon btn-danger custom-btn"
+                  (click)="confirmAlertDelete(news.Id)"
+                >
+                  <i class="ni ni-scissors"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer py-4">
+        <nav *ngIf="pagination" aria-label="...">
+          <ul class="pagination justify-content-end mb-0">
+            <li
+              class="page-item"
+              [ngClass]="{ disabled: !pagination.HasPrevious }"
+            >
+              <a class="page-link" (click)="previous()">
+                <i class="fas fa-angle-left"></i>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li
+              class="page-item"
+              [ngClass]="{ active: item == pagination.CurrentPage }"
+              *ngFor="let item of listPage; let pageIndex = index"
+            >
+              <a class="page-link" (click)="change(item)"
+                >{{ item + 1 }}
+                <span *ngIf="item == pagination.CurrentPage" class="sr-only"
+                  >(current)</span
+                ></a
+              >
+            </li>
+            <li
+              class="page-item"
+              [ngClass]="{ disabled: !pagination.HasNext }"
+            >
+              <a class="page-link" (click)="next()">
+                <i class="fas fa-angle-right"></i>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ng-template #UpdateContent>
+  <label for=""> Cập nhật </label>
+</ng-template>
+<ng-template #DeleteContent>
+  <label> Xoá </label>
+</ng-template>
+<ng-template #ViewContent>
+  <label> Xem chi tiết </label>
+</ng-template>

@@ -1,0 +1,118 @@
+
+<div class="products-breadcrumb"  id="target1" #target>
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Chi tiết tin tức</li>
+        </ul>
+    </div>
+  </div>
+        <section class="section single-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="padding: 10px 20px;">
+                        
+                        <div class="page-wrapper">
+                            <div class="blog-title-area text-center">
+                                <p style="font-size: 38px; margin-top:10px; padding: 5px; color: brown;"><b>{{blog.Title}}</b></p>
+                            </div>
+                            <p style="font-size: 15px; padding: 10px 0px 5px 0px;;"><i> <b>Thể loại:</b> {{blog.TypeNewsText}} &nbsp; &nbsp; <b>Người viết:</b> {{blog.CreateUserName}} &nbsp; &nbsp; <b>Ngày tạo:</b> {{ formatDateVN(blog.CreateDate) }}</i></p>
+                            <div style="margin-bottom: 20px;">
+                                <div [innerHTML]="blog.HtmlContent | safeHtml"></div>
+                            </div><!-- end media -->
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                       
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+                            <div class="widget" style=" margin-top:30px;">
+                                <p style="font-size: 24px; margin-bottom: 10px;" class="widget-title"><b>Thông tin thú vị</b></p>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div>
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nội dung bổ ích về thú cưng</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div>
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nhiều phần quà hấp dẫn</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div>
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Cách chăm sóc thú cưng tốt nhất</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <p style="font-size: 24px; margin-bottom: 10px;" class="widget-title"><b>Đánh giá thông tin</b></p>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Thông tin đa chiều, hữu ích</p>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nội dung đa dạng, chính xác</p>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif; margin: 10px 0;" class="mb-1">Nội dung mới mẽ, tin hot</p>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                       
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>

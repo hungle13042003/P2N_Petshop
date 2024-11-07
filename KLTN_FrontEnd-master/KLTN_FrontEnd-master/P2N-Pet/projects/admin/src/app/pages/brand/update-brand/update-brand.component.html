@@ -1,0 +1,149 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-0">
+    <!-- bg-gradient-danger -->
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="container-fluid my-form">
+        <div class="row">
+            <div class="col-xl-2">
+
+            </div>
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-xl-6 col-md-12">
+                                <h3 class="mb-0">Cập nhật chi nhánh</h3>
+                            </div>
+                            <div class="col-xl-6 col-md-12 text-right">
+                                <button (click)="onSubmit()" [disabled]="loading" class="btn btn-primary"><span *ngIf="loading"
+                                    class="spinner-border spinner-border-sm mr-1"></span>Lưu</button>
+                                <a [routerLink]="['/admin/brand/list-brand']" class="btn btn-default">Hủy</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!firstload" class="card-body">
+                        <form [formGroup]="formMain">
+                            <h6 class="heading-small text-muted">Thông tin chi nhánh</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Email">Email liên hệ</label>
+                                            <input type="text" class="form-control form-control-alternative" placeholder="Email liên hệ" [ngClass]="{ 'is-invalid': submitted && fMain.Email.errors && fMain.Email.touched }" formControlName="Email">
+                                            <div *ngIf="submitted && fMain.Email.errors" class="invalid-feedback">
+                                                <div *ngIf="fMain.Email.errors.required">Vui lòng điền email</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Phone">Số điện thoại</label>
+                                            <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại" [ngClass]="{ 'is-invalid': submitted && fMain.Phone.errors}" formControlName="Phone">
+                                            <div *ngIf="submitted && fMain.Phone.errors" class="invalid-feedback">
+                                                <div *ngIf="fMain.Phone.errors.required">Vui lòng điền số điện thoại</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Address">Địa chỉ</label>
+                                            <input type="text" class="form-control form-control-alternative" placeholder="Địa chỉ chi nhánh" [ngClass]="{ 'is-invalid': submitted && fMain.Address.errors}" formControlName="Address">
+                                            <div *ngIf="submitted && fMain.Address.errors" class="invalid-feedback">
+                                                <div *ngIf="fMain.Address.errors.required">Vui lòng điền số điện thoại</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Status">Trạng thái</label>
+                                            <select class="form-control form-control-alternative" placeholder="Trạng thái" [ngClass]="{ 'is-invalid': submitted && fMain.Status.errors }" formControlName="Status">
+                                                    <option *ngFor="let item of brandStatusOptions" [ngValue]="item.Id">
+                                                    {{ item.Title }}
+                                                    </option>
+                                                </select>
+                                            <div *ngIf="submitted && fMain.Status.errors" class="invalid-feedback">
+                                                <div *ngIf="fMain.Status.errors.required">Vui lòng chọn trạng thái</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add product vào chi nhánh -->
+                            <div class="card-header bg-white border-0">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-6 col-md-12">
+                                        <h3 class="mb-0">Thêm sản phẩm vào chi nhánh</h3>
+                                    </div>
+                                    <div class="col-xl-6 col-md-12 text-right">
+                                        <button (click)="createRow()" class="btn btn-outline-danger">                                        
+                                            Thêm hàng
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <label class="form-control-label">Thú cưng, sản phẩm</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label class="form-control-label">Số lượng</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label class="form-control-label">Tác vụ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pl-lg-4" formArrayName="aBrandProducts">
+                                    <div *ngFor="let p of fProduct.controls; let ix = index" [formGroupName]="ix" class="brandProducts">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <!-- <label class="form-control-label" for="ProductDetailId">Thú cưng</label> -->
+                                                    <select class="form-control form-control-alternative" placeholder="Thú cưng" [ngClass]="{ 'is-invalid': submitted }" formControlName="ProductDetailId">
+                                                        <option *ngFor="let item of productDetailSelection" [ngValue]="item.Id">
+                                                            {{ item.ProductName }}
+                                                        </option>
+                                                    </select>
+                                                    <!-- <div *ngIf="submitted && fProduct.ProductDetailId.errors" class="invalid-feedback">
+                                                        <div *ngIf="fProduct.ProductDetailId.errors.required">Vui lòng chọn thú cưng</div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <!-- <label class="form-control-label" for="QuantityInBrand">Số lượng</label> -->
+                                                    <input type="text" class="form-control form-control-alternative" placeholder="Số lượng" [ngClass]="{ 'is-invalid': submitted }" formControlName="QuantityInBrand">
+                                                    <!-- <div *ngIf="submitted && fProduct.QuantityInBrand.errors" class="invalid-feedback">
+                                                        <div *ngIf="fProduct.QuantityInBrand.errors.required">Vui lòng điền Số lượng</div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button (click)="deleteRow(ix)" class="btn btn-danger">                                        
+                                                    Xóa
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="firstload" class="card-body loading-form">
+                        <span *ngIf="firstload" class="spinner-border spinner-border-lg"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

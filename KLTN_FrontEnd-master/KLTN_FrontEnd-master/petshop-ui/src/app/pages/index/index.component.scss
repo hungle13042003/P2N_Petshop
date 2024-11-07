@@ -1,0 +1,59 @@
+.topright {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+    background: green;
+    color: white;
+    width: 15%;
+    height: 5%;
+    text-align: center;
+    float: right;
+}
+
+.display-img {
+    display: block;
+    max-width: 100%;
+//    width: 80%;
+    height: 250px;
+    border-radius: 3%;
+    border: 1px dotted orange;
+    position: relative;
+}
+
+.border-item {
+    width: 140%;
+}
+
+.img-top-img {
+    position: absolute;
+}
+
+.text-right-a {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    float: right;
+    text-align: center;
+    padding-right: 2%;
+    color: blue;
+}
+
+.banner-img {
+    /* background: url(../../../assets/pet/km-1.jpg) no-repeat 0px 0px; */
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+}
+
+.img-banner-index {
+    position: relative;
+    width: 1145px;
+    height: 500px;
+    margin-top: -11%;
+}
+
+.img-km {
+    border: 0.5px dotted orange;
+}

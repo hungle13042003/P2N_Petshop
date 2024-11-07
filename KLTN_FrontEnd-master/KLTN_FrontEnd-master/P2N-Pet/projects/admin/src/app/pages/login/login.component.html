@@ -1,0 +1,65 @@
+<div class="header bg-gradient-danger py-7 py-lg-7">
+    <div class="container">
+      <div class="header-body text-center mb-7">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-6">
+            <span style="font-size: 30px;" class="text-white"><b>Chào mừng đến với P2N Pet!</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="separator separator-bottom separator-skew zindex-100">
+    </div>
+  </div>
+ <!-- Page content -->
+<div class="container mt--8 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <!-- <div class="card bg-secondary shadow border-0"> -->
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4" style="display: grid;">
+            <div style="margin-bottom: 3px;">
+              <img src="assets/img/p2n/logo_p2n.png" style="height: 150px;">
+            </div>
+          </div>
+          <form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                  formControlName="username" placeholder="Tên đăng nhập" type="username">
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Vui lòng điền tên đăng nhập</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                  formControlName="password" placeholder="Mật khẩu" type="password">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Vui lòng điền mật khẩu</div>
+                </div>
+              </div>
+            </div>
+            
+              <div *ngIf="message!=''" class="text-center" style="color: #990000; font-size: 14px;"><b>*{{ message }}</b></div>
+           
+            <div class="text-center"><span class="spinner-border-sm mr-1"></span>
+              <button [disabled]="loading" type="submit" class="btn btn-primary my-4">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Đăng nhập
+              </button>
+            </div>
+          </form>
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+<div class="container"><br></div>

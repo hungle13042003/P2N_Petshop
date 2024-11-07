@@ -1,0 +1,308 @@
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <li>Thông tin thú cưng</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div class="w3l_banner_nav_right">
+        <!-- <div class="w3l_banner_nav_right_banner3">
+            <h3>Giá tốt cho tất cả thú cưng<span class="blink_me"></span></h3>
+        </div> -->
+        <div class="agileinfo_single" id="target">
+            <h5> {{ petDetail.ProductTitle }} </h5>
+            <div class="col-md-4">
+                <div class="dropdown-img">
+                    <img src="{{ petImageRoot }}" alt=" " class="img-size-root" />
+                    <div class="dropdown-content-img">
+                        <img src="{{ petImageRoot }}" alt=" " class="img-size" />
+                    </div>
+                </div>
+                <div style="margin-left: -10%;">
+                    <div class="dropdown-item-img drop-image-item-cus">
+                        <img *ngFor="let petImage of petDetail.productImages; index as indexOfelement" src="{{ petImage }}" alt=" " class="image-magrin" (click)="changeImage(indexOfelement)" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 agileinfo_single_right">
+                <div class="snipcart-thumb agileinfo_single_right_snipcart" style="display: inline-flex;">
+                    <h4 style="display: -webkit-inline-box;"> Giá: {{petDetail.PriceDiscount|number : '4.0-2'}} VNĐ
+                        <span *ngIf=" petDetail.Discount > 0"> {{ petDetail.Price|number : '4.0-2' }} VNĐ</span>
+                        <p class="price-discount" *ngIf=" petDetail.Discount > 0"> -{{ petDetail.Discount}}%</p>
+                    </h4>
+                </div>
+                <hr class="my-hr">
+                <div class="description-single" *ngIf="petDetail.BreedId > 0">
+                    <h4 style="margin-right: 1%; width: 20%; text-align: left;">Giống loài:</h4>
+                    <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.BreedName }}</p>
+                </div>
+                <div class="description-single" *ngIf="petDetail.BreedId == 0">
+                    <h4 style="margin-right: 1%; width: 20%; text-align: left;">Loại sản phẩm:</h4>
+                    <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.CategoryName }}</p>
+                </div>
+                <div class="description-single">
+                    <h4 style="margin-right: 1%; width: 20%; text-align: left;">Nhà cung cấp:</h4>
+                    <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.SupplierName }}</p>
+                </div>
+                <div class="description-single">
+                    <h4 style="margin-right: 1%; width: 20%; text-align: left;">Nguồn gốc:</h4>
+                    <p style="margin-top: 0; color: #999; width: 80%;">{{ petDetail.Content }}</p>
+                </div>
+                <div class="description-single">
+                    <h4 style="margin-right: 1%; width: 20%; text-align: left;">Số lượng còn:</h4>
+                    <p style="margin-top: 0; color: #999; width: 80%;" *ngIf="petDetail.BrandId == 0">
+                      {{ petDetail.Quantity - quantity}} <span *ngIf="petDetail.TypeProductId == 10">con</span><span *ngIf="petDetail.TypeProductId != 10"> sản phẩm</span>
+                    </p>
+                    <p style="margin-top: 0; color: #999; width: 80%;" *ngIf="petDetail.BrandId > 0">
+                      {{ petDetail.QuantityBrand - quantity}} <span *ngIf="petDetail.TypeProductId == 10">con</span><span *ngIf="petDetail.TypeProductId != 10"> sản phẩm</span>
+                    </p>
+                </div>
+                <hr class="my-hr">
+                <div class="dislay-select-inline" *ngIf="petDetail.NumBrand > 0">
+                    <div class="group-item" *ngIf="showBrand == 0 && petDetail.BrandId == 0">
+                        <label (click)="showBrand = 1" *ngIf="petDetail.TypeProductId == 10"> Xem chi nhánh có thú cưng</label>
+                        <label (click)="showBrand = 1" *ngIf="petDetail.TypeProductId != 10"> Xem chi nhánh có sản phẩm</label>
+                    </div>
+                    <div class="group-item" *ngIf="showBrand > 0 || petDetail.BrandId > 0">
+                        <div>
+                            <label class="" for="petDetailCondition.BrandId">Chi nhánh</label>
+                        </div>
+                        <div class="intance-div decrease-intance-line">
+                            <select class="form-control select-item" placeholder="Chi nhánh cửa hàng" [(ngModel)]="petDetailCondition.BrandId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(10)">
+                                <option *ngFor="let item of petDetail.productBrands " [ngValue]="item.BrandId">
+                                  {{ item.Address }}
+                                </option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-hr" *ngIf="petDetail.NumBrand > 0">
+
+                <div class="dislay-select-inline">
+                    <div class="group-item" *ngIf="petDetail.ColorId > 0">
+                        <div>
+                            <label class="" for="petDetailCondition.ColorId">Màu sắc</label>
+                        </div>
+                        <div class="intance-div" *ngIf="petDetail.AgeId > 0">
+                            <select class="form-control select-item" placeholder="Màu sắc" [(ngModel)]="petDetailCondition.ColorId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(1)">
+                                <option *ngFor="let item of petDetail.productColors " [ngValue]="item.ColorId">
+                                  {{ item.ColorName }}
+                                </option>
+                              </select>
+                        </div>
+                        <!-- Dùng cho thức ăn, phụ kiện -->
+                        <div class="intance-div decrease-intance-line" *ngIf="petDetail.AgeId == 0">
+                            <select class="form-control select-item" placeholder="Màu sắc" [(ngModel)]="petDetailCondition.ColorId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(1)">
+                              <option *ngFor="let item of petDetail.productColors " [ngValue]="item.ColorId">
+                                {{ item.ColorName }}
+                              </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="group-item" *ngIf="petDetail.AgeId > 0">
+                        <div>
+                            <label class="" for="petDetailCondition.AgeId">Độ tuổi</label>
+                        </div>
+                        <div class="intance-div">
+                            <select class="form-control select-item" placeholder="Độ tuổi" [(ngModel)]="petDetailCondition.AgeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(2)">
+                                <option *ngFor="let item of petDetail.productAges " [ngValue]="item.AgeId">
+                                  {{ item.AgeTitle }}
+                                </option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="group-item" *ngIf="petDetail.SizeId > 0">
+                        <div>
+                            <label class="" for="petDetailCondition.SizeId">Kích cỡ</label>
+                        </div>
+                        <div class="intance-div " *ngIf="petDetail.AgeId > 0">
+                            <select class="form-control select-item" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(3)">
+                                <option *ngFor="let item of petDetail.productSizes " [ngValue]="item.SizeId">
+                                  {{ item.SizeTitle }}
+                                </option>
+                              </select>
+                        </div>
+                        <!-- Dùng cho 1 field kích cỡ -->
+                        <div class="intance-div decrease-intance-line" *ngIf="petDetail.AgeId == 0 && petDetail.ColorId == 0">
+                            <select class="form-control select-item-one" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(3)">
+                              <option *ngFor="let item of petDetail.productSizes " [ngValue]="item.SizeId">
+                                {{ item.SizeTitle }}
+                              </option>
+                            </select>
+                        </div>
+                        <!-- Dùng cho 2 field trở lên -->
+                        <div class="intance-div decrease-intance-line" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId == 0">
+                            <select class="form-control select-item" placeholder="Kích cỡ" [(ngModel)]="petDetailCondition.SizeId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(3)">
+                              <option *ngFor="let item of petDetail.productSizes " [ngValue]="item.SizeId">
+                                {{ item.SizeTitle }}
+                              </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="group-item" *ngIf="petDetail.SexId > 0">
+                        <div>
+                            <label class="" for="petDetailCondition.SexId">Giới tính</label>
+                        </div>
+                        <div class="intance-div">
+                            <select class="form-control select-item" placeholder="Chọn giới tính" [(ngModel)]="petDetailCondition.SexId" [ngModelOptions]="{standalone: true}" (change)="onChangePet(4)">
+                                <option *ngFor="let item of petDetail.productSexes " [ngValue]="item.SexId">
+                                  {{ item.SexTitle }}
+                                </option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-hr" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId > 0">
+                <hr class="my-hr" *ngIf="petDetail.ColorId > 0 && petDetail.AgeId == 0">
+                <hr class="my-hr" *ngIf="petDetail.ColorId == 0 && petDetail.AgeId == 0">
+
+                <div class="snipcart-item block">
+                    <div class="alert alert-danger" role="alert" *ngIf=" message != '' ">
+                        <strong>{{ message }}</strong>
+                    </div>
+                    <div class="snipcart-details agileinfo_single_right_details">
+                        <form role="form" [formGroup]="form" (ngSubmit)="AddToCart(petDetail.ProductDetailId)">
+                            <div class="description-single" style="margin-bottom: 10%;width: 300%;">
+                                <h4 style="margin-right: 2%; width: 30%; text-align: left; padding-top: 1.75%;">Số lượng đặt: </h4>
+                                <input *ngIf="brandIdPet == 0" class="form-control input-form" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }" formControlName="Quantity" value="1" min="1" max="{{petDetail.Quantity - quantity}}" type="number">
+                                <input *ngIf="brandIdPet > 0" class="form-control input-form" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }" formControlName="Quantity" value="1" min="1" max="{{petDetail.QuantityBrand - quantity}}" type="number">
+                            </div>
+
+                            <input [disabled]="loading" type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" style="width: 120%; margin-top: 35px; font-size: 16px;" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- comment -->
+<div class="container" style="background-color: white; padding-left: 17%;">
+    <div class="row bootstrap snippets bootdeys">
+        <div class="col-md-12 col-sm-12">
+            <div class="comment-wrapper">
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="background-color: #84C639; color: white; padding: 15px 15px;">
+                        <b>Bình luận</b>
+                    </div>
+                    <div class="panel-body">
+                        <div id="cmtTarget"></div>
+                        <span *ngIf="user.Id > 0">
+                            <textarea class="form-control" id="contentcomment" placeholder="Nội dung bình luận..." rows="3"  [(ngModel)]="contentComment" (keyup.enter)="CreateOrUpdateComment()"></textarea>
+                            <br>
+                            <button type="button" class="btn btn-info pull-right" (click)="CreateOrUpdateComment()">
+                                <p *ngIf="isUpdated == 0">GỬI</p>
+                                <p *ngIf="isUpdated == 1">LƯU</p>
+                            </button>
+                            <div class="clearfix"></div>
+                            <hr>
+                        </span>
+                        <ul class="media-list">
+                            <li class="media" *ngFor="let cmt of listComment">
+                                <a class="pull-left">
+                                    <img src="{{cmt.Avatar}}" alt="" class="img-circle">
+                                </a>
+                                <div class="media-body">
+                                    <span class="text-muted pull-right">
+                                        <small class="text-muted">{{ formatDateVN(cmt.CreateDate) }}</small>
+                                    </span>
+                                    <strong class="text-success">{{ cmt.Name }}</strong>
+                                    <p style="color: black;">
+                                        {{ cmt.Content }}
+                                        <span class="text-muted pull-right">
+                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId"
+                                             (click)="GetDetailComment(cmt.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
+                                             <span *ngIf="user.Id == cmt.UserId">|</span>
+                                        <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == cmt.UserId" (click)="DeleteComment(cmt.CommentId)"><b>Xóa bình luận</b></button>
+                                        </span>
+
+                                    </p>
+                                    <a (click)="GetDetailComment(cmt.CommentId, 0)" *ngIf="user.Id > 0"><span><i class="fa fa-reply"></i> Phản hồi</span></a>
+                                    <span class="text-reply ml-10" *ngFor="let itemReply of cmt.CommentChilds">
+                                        <ul class="media-list">
+                                            <li class="media" style="margin-top: 10px;">
+                                                <a class="pull-left">
+                                                    <img src="{{itemReply.Avatar}}" alt="" class="img-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <span class="text-muted pull-right">
+                                                        <small class="text-muted">{{ formatDateVN(itemReply.CreateDate) }}</small>
+                                                    </span>
+                                                    <strong class="text-success">{{ itemReply.Name }}</strong>
+                                                    <p style="color: black;">
+                                                        {{ itemReply.Content }}
+                                                        <span class="text-muted pull-right">
+                                                            <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId"
+                                                            (click)="GetDetailComment(itemReply.CommentId); isUpdated = 1;" style="color: blue;"><b>Cập nhật</b></button>
+                                                            <span *ngIf="user.Id == itemReply.UserId">|</span>
+                                                        <button class="btn-cmt-custom text-right-a" *ngIf="user.Id == itemReply.UserId" (click)="DeleteComment(itemReply.CommentId)"><b>Xóa bình luận</b></button>
+                                                        </span>
+
+                                                    </p>
+                                                    <!-- <a><span><i class="fa fa-reply" (click)="CreateOrUpdateComment(itemReply)"  ></i> Phản hồi</span></a>  -->
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //banner -->
+<!-- brands -->
+<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_popular">
+    <div class="container">
+        <h3>Khuyến mãi lớn</h3>
+        <div class="w3ls_w3l_banner_nav_right_grid1">
+            <div class="col-md-3 w3ls_w3l_banner_left" *ngFor="let item of pets" style="margin: 0 8% 2% 0">
+                <!-- start -->
+                <div class="hover14 column border-item">
+                    <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                        <div class="agile_top_brand_left_grid_pos" *ngIf=" item.Discount > 0">
+                            <img src="../../../assets/images/offer.png" alt=" " class="img-responsive" />
+                        </div>
+                        <div class="agile_top_brand_left_grid1">
+                            <figure>
+                                <div class="snipcart-item block">
+                                    <div class="snipcart-thumb">
+                                        <a routerLink="/pets/{{ item.ProductDetailId}}"><img src="{{ item.ProductImage }}" alt="{{ item.BreedName }}" class="display-img" /></a>
+                                        <div class="topright" *ngIf="item.Discount > 0"><b>- {{ item.Discount }} %</b></div>
+                                    </div>
+                                    <div style="width:77%; margin: auto;">
+                                        <p>{{ item.ProductTitle }}</p>
+                                        <h4 class="top_brand_home_details">{{ item.PriceDiscount|number: '4.0-2'}} VNĐ<span *ngIf=" item.Discount > 0"> {{ item.Price | number : '4.0-2'}} VNĐ</span></h4>
+                                    </div>
+                                    <div class="snipcart-details top_brand_home_details">
+                                        <form>
+                                            <fieldset>
+                                                <input type="submit" name="submit" value="Xem chi tiết" class="button" routerLink="/pets/{{item.ProductDetailId}}" />
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //brands -->

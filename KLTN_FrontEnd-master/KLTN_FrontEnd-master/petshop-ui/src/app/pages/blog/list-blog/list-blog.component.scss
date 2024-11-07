@@ -1,0 +1,20 @@
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+}
+
+.blog-box{
+  margin: 30px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.blog-meta {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

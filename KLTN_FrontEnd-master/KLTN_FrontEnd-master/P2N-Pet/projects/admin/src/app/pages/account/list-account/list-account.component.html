@@ -1,0 +1,219 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">   <!-- bg-gradient-danger -->
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col">
+              <div class="card">
+                <div class="card bg-secondary shadow">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col-md-3 col-12">
+                              <h3 class="mb-0">Tìm kiếm</h3>
+                          </div>
+                          <div class="col-md-9 col-12 text-right">
+                              <button type="submit" class="btn btn-outline-primary" (click)="onSearch()">Tìm kiếm</button>
+                              <button type="button" class="btn btn-outline-dark" name="clear-search" (click)="clearForm()">Nhập lại</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="pl-lg-4">
+                          <div class="row">
+                              <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="accountCondition.Name">Tên tài khoản</label>
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Tên tài khoản"
+                                    [(ngModel)]="accountCondition.Name" [ngModelOptions]="{standalone: true}">
+                                </div>
+                              </div>
+                              <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="accountCondition.Phone">Số điện thoại</label>
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Số điện thoại"
+                                    [(ngModel)]="accountCondition.Phone" [ngModelOptions]="{standalone: true}">
+                                </div>
+                              </div>
+                              <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="accountCondition.Email">Email</label>
+                                  <input type="text" class="form-control form-control-alternative" placeholder="Email"
+                                    [(ngModel)]="accountCondition.Email" [ngModelOptions]="{standalone: true}">
+                                </div>
+                              </div>
+                              <div *ngIf="statusaccount == 50" class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="accountCondition.RoleId">Vai trò</label>
+                                  <select class="form-control form-control-alternative" placeholder="Vai trò"
+                                    [(ngModel)]="accountCondition.RoleId" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let item of roleSelection" [ngValue]="item.RoleId">
+                                      {{ item.RoleName }}
+                                    </option>
+                                  </select>
+                                </div>
+                            </div>
+                              <div *ngIf="statusaccount != 50" class="col-lg-3 col-md-4">
+                                  <div class="form-group">
+                                    <label class="form-control-label" for="accountCondition.Status">Trạng thái</label>
+                                    <select class="form-control form-control-alternative" placeholder="Trạng thái"
+                                      [(ngModel)]="accountCondition.Status" [ngModelOptions]="{standalone: true}">
+                                      <option *ngFor="let item of accountStatusOptions" [ngValue]="item.Id">
+                                        {{ item.Title }}
+                                      </option>
+                                    </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col-md-5 col-12" >
+                    <h3 class="mb-0" *ngIf="statusaccount == 30" style="color: red;"><b>BẢNG KHÁCH HÀNG</b></h3>
+                    <h3 class="mb-0" *ngIf="statusaccount == 20" style="color: red;"><b>BẢNG NHÂN VIÊN</b></h3>
+                    <h3 class="mb-0" *ngIf="statusaccount == 10" style="color: red;"><b>BẢNG QUẢN TRỊ VIÊN</b></h3>
+                    <h3 class="mb-0" *ngIf="statusaccount == 50" style="color: red;"><b>BẢNG KHÓA TÀI KHOẢN</b></h3>
+                </div>
+                <div class="col-md-7 col-12 text-right">
+                  <button type="button" class="btn btn-outline-primary" name="clear-search" *ngIf="statusaccount != 30" (click)="getAccountFollowStatus(30)">Khách hàng</button>
+                  <button type="button" class="btn btn-outline-dark" name="clear-search" *ngIf="statusaccount != 20" (click)="getAccountFollowStatus(20)">Nhân viên</button>
+                  <button type="button" class="btn btn-outline-warning" name="clear-search" *ngIf="statusaccount != 10" (click)="getAccountFollowStatus(10)">Quản trị viên</button>
+                  <button type="button" class="btn btn-outline-danger" name="clear-search" *ngIf="statusaccount != 50" (click)="getAccountFollowStatus(50)">Mở khóa</button>
+                  <a [routerLink]="['/admin/account/create']" class="btn btn-success">Tạo mới</a>
+                </div>
+            </div>
+        </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="table-success">
+                <tr>
+                    <th scope="col" class="text-center">Mã tài khoản</th>
+                    <th scope="col" class="text-center">Thông tin tài khoản</th>
+                    <th scope="col" class="text-center">Địa chỉ</th>
+                    <th *ngIf="statusaccount == 50" scope="col" class="text-center">Vai trò</th>
+                    <th *ngIf="statusaccount != 50" scope="col" class="text-center">Trạng thái</th>
+                    <th scope="col" class="text-center">Thông tin tạo</th>
+                    <th scope="col" class="text-center">Thông tin cập nhật</th>
+                    <th scope="col" class="text-center">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let account of accounts">
+                    <th scope="row" class="text-center">
+                        <div class="media align-items-center">
+                          <div class="media-body">
+                            <span class="mb-0 text-sm">
+                              #{{ account.Id }}
+                            </span>
+                          </div>
+                        </div>
+                      </th>
+                    <th scope="row" class="text-center">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">
+                            Tên: {{ account.Name }} <br>
+                            Email: {{ account.Email }} <br>
+                            Số điện thoại: {{ account.Phone }}
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                    <td class="text-center">
+                      {{ account.Address }}
+                    </td>
+                    <td *ngIf="statusaccount == 50" class="text-center">
+                        {{ account.RoleName }}
+                      </td>
+                    <td *ngIf="statusaccount != 50" class="text-center">
+                      {{ account.StatusText }}
+                    </td>
+                    <td class="text-center">
+                        Người tạo: {{ account.CreateUserName }} <br>
+                        Ngày tạo: {{ formatDateVN(account.CreateDate) }}
+                      </td>
+                      <td class="text-center">
+                        Người cập nhật: {{ account.UpdateUserName }} <br>
+                        Ngày cập nhật: {{ formatDateVN(account.UpdateDate) }}
+                      </td>
+                      <td class="text-center">
+                          <!-- <div ngbDropdown placement="bottom-right"> -->
+                          <button [tooltip]="ViewContent" contentType="template"
+                           class="btn btn-icon btn-info custom-btn" routerLink="/admin/account/view/{{account.Id}}" *ngIf="statusaccount == 10">
+                              <i class='ni ni-laptop'></i>
+                          </button>
+                          <button [tooltip]="BlockContent" contentType="template"
+                           class="btn btn-icon btn-warning custom-btn" (click)="confirmAlertAction('Block',account.Id, account.Name)" *ngIf="statusaccount == 20 || statusaccount == 30">
+                            <i class='ni ni-lock-circle-open'></i>
+                          </button>
+                          <button [tooltip]="OpenContent" contentType="template"
+                           class="btn btn-icon btn-success custom-btn"(click)="confirmAlertAction('Open',account.Id, account.Name)" *ngIf="statusaccount == 50">
+                            <i class='ni ni-key-25'></i>
+                          </button>
+                          <button [tooltip]="UpdateContent" contentType="template"
+                           class="btn btn-icon btn-primary custom-btn" routerLink="/admin/account/update/{{account.Id}}" *ngIf="statusaccount != 10 && statusaccount != 50" >
+                              <i class='ni ni-ruler-pencil'></i>
+                          </button>
+                          <button [tooltip]="DeleteContent" contentType="template"
+                            class="btn btn-icon btn-danger custom-btn" (click)="confirmAlertAction('Delete',account.Id, account.Name)" *ngIf="statusaccount != 10">
+                              <i class='ni ni-scissors'></i>
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer py-4">
+            <nav *ngIf="pagination" aria-label="...">
+              <ul class="pagination justify-content-end mb-0">
+                <li class="page-item" [ngClass]="{ disabled: !pagination.HasPrevious }">
+                  <a class="page-link" (click)="previous()">
+                    <i class="fas fa-angle-left"></i>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item" [ngClass]="{ active: item == pagination.CurrentPage }" *ngFor="let item of listPage; let pageIndex = index">
+                  <a class="page-link" (click)="change(item)">{{item + 1}} <span *ngIf="item == pagination.CurrentPage" class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item" [ngClass]="{ disabled: !pagination.HasNext }">
+                  <a class="page-link" (click)="next()">
+                    <i class="fas fa-angle-right"></i>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #UpdateContent>
+    <label for=""> Cập nhật </label>
+  </ng-template>
+  <ng-template #DeleteContent>
+    <label> Xoá </label>
+  </ng-template>
+  <ng-template #ViewContent>
+    <label> Xem chi tiết </label>
+  </ng-template>
+  <ng-template #BlockContent>
+    <label> Khoá tài khoản </label>
+  </ng-template>
+  <ng-template #OpenContent>
+    <label> Mở khoá </label>
+  </ng-template>

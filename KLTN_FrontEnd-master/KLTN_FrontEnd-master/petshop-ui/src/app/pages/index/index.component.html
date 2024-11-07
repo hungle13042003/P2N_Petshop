@@ -1,0 +1,167 @@
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li><i class="fa fa-home" aria-hidden="true"></i><a routerLink="/index">Trang chủ</a><span>|</span></li>
+            <!-- <li>Trang chính</li> -->
+        </ul>
+    </div>
+</div>
+<!-- banner -->
+<div class="banner">
+    <app-banner-left></app-banner-left>
+    <div class="w3l_banner_nav_right">
+        <div>
+            <img src="{{ promotion.Image }}" alt="" style="width:100%;height:367px;"/>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- banner -->
+
+<!-- banner bottom-->
+<div class="banner_bottom">
+    <!-- <div class="wthree_banner_bottom_left_grid_sub">
+    </div> -->
+    <div class="w3l_banner_nav_right">
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="../../../assets/pet/pet-6.jpg" alt="ABCD" class="img-responsive img-km" />
+                <div class="wthree_banner_bottom_left_grid_pos">
+                    <h4><b>Giảm giá</b> <span>15%</span></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="../../../assets/pet/km-3.jpg" alt=" " class="img-responsive img-km" />
+                <div class="wthree_banner_btm_pos">
+                    <h3 style="color: lightgoldenrodyellow"><b>Đa dạng</b>
+                        <span style="color: #cc0000;">Uy tín</span>
+                        <i style="color: aquamarine;">100 %</i></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 wthree_banner_bottom_left">
+            <div class="wthree_banner_bottom_left_grid">
+                <img src="../../../assets/pet/pet-5.jpg" alt=" " class="img-responsive img-km" />
+                <div class="wthree_banner_btm_pos1">
+                    <h3 style="color: orangered; font-weight:  bold; margin-top: -5%;">Tiết kiệm <span style="color: orangered; font-weight: bold;"> đến</span> 2 triệu</h3>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- banner bottom-->
+<!-- top-brands -->
+<div class="top-brands">
+    <div class="container">
+        <h3>Giảm giá sốc</h3>
+        <div class="agile_top_brands_grids">
+            <div class="col-md-3 top_brand_left" *ngFor="let item of pets" style="margin: 0 8% 2% 0">
+                <div class="hover14 column border-item">
+                    <div class="agile_top_brand_left_grid">
+                        <div class="agile_top_brand_left_grid_pos " *ngIf=" item.Discount > 0">
+                            <img src="../../../assets/images/offer.png" alt=" " class="img-on-img" />
+                        </div>
+                        <div class="agile_top_brand_left_grid1">
+                            <figure>
+                                <div class="snipcart-item block">
+                                    <div class="snipcart-thumb">
+                                        <a routerLink="/pets/{{ item.ProductDetailId}}"><img src="{{ item.ProductImage }}" alt="{{ item.BreedName }}" class="display-img" /></a>
+                                        <div class="topright" *ngIf="item.Discount > 0"><b>- {{ item.Discount }} %</b></div>
+                                    </div>
+                                    <div style="width:77%; margin: auto;">
+                                        <p>{{ item.ProductTitle }}</p>
+                                        <h4>{{ item.PriceDiscount|number: '4.0-2'}} VNĐ<span *ngIf=" item.Discount > 0"> {{ item.Price | number : '4.0-2'}} VNĐ</span></h4>
+                                    </div>
+                                    <div class="snipcart-details top_brand_home_details">
+                                        <form>
+                                            <fieldset>
+                                                <input type="submit" name="submit" value="Xem chi tiết" class="button" routerLink="/pets/{{item.ProductDetailId}}" />
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div><a routerLink="/pets" class="text-right-a">Xem tất cả</a></div>
+    </div>
+</div>
+<!-- //top-brands -->
+<!-- fresh-vegetables -->
+<div class="fresh-vegetables">
+    <div class="container">
+        <h3>Thú cưng nổi bật</h3>
+        <div class="w3l_fresh_vegetables_grids">
+            <div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
+                <div class="w3l_fresh_vegetables_grid2">
+                    <ul>
+                        <!-- <li><i class="fa fa-check" aria-hidden="true"></i><a routerLink="/pets">Tất cả thú cưng</a></li>
+                        <li *ngFor="let item of parentBreeds ">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <a routerLink="/category/root/{{ item.Id}}">Giống {{ item.BreedName }}</a>
+                        </li> -->
+                        <li *ngFor="let p of typeProducts" >
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                          <a routerLink="/typeproduct/{{ p.TypeProductId}}">Tất cả {{ p.TypeProductName }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 w3l_fresh_vegetables_grid_right">
+                <div class="col-md-4 w3l_fresh_vegetables_grid">
+                    <div class="w3l_fresh_vegetables_grid1">
+                        <img src="../../../assets/pet/index-4.jpg" alt=" " class="img-responsive img-km" />
+                    </div>
+                    <div class="w3l_fresh_vegetables_grid1_bottom">
+                        <img src="../../../assets/pet/index-5.jpg" alt=" " class="img-responsive img-km" />
+                    </div>
+                </div>
+                <div class="col-md-4 w3l_fresh_vegetables_grid">
+                    <div class="w3l_fresh_vegetables_grid1">
+                        <div class="w3l_fresh_vegetables_grid1_rel">
+                            <img src="../../../assets/pet/index-1.jpg" alt=" " class="img-responsive img-km" />
+                            <div class="w3l_fresh_vegetables_grid1_rel_pos">
+                                <div class="more m1">
+                                    <a routerLink="/pets" class="button--saqui button--round-l button--text-thick" data-text="Xem ngay">Xem ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3l_fresh_vegetables_grid1_bottom">
+                        <img src="../../../assets/pet/pet-1.jpg" alt=" " class="img-responsive img-km" />
+                        <div class="w3l_fresh_vegetables_grid1_bottom_pos">
+                            <h5>Giá đặc biệt</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 w3l_fresh_vegetables_grid">
+                    <div class="w3l_fresh_vegetables_grid1">
+                        <img src="../../../assets/pet/index-2.jpg" alt=" " class="img-responsive img-km" />
+                    </div>
+                    <div class="w3l_fresh_vegetables_grid1_bottom">
+                        <img src="../../../assets/pet/index-3.jpg" alt=" " class="img-responsive img-km" />
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+                <div class="agileinfo_move_text">
+                    <div class="agileinfo_marquee">
+                        <h4>Giảm giá lên đến <span class="blink_me">15%</span> cho tất cả các thú cưng</h4>
+                    </div>
+                    <div class="agileinfo_breaking_news">
+                        <span> </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
